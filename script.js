@@ -10,21 +10,23 @@
 // This function should return a random value 
 // between 1-3, and then make the appropriate
 // selection based on that number. 
+let compWeapon;
+let userWeapon;
+let userInput;
 
 let getConsoleChoice = function(){
     let rndInt= Math.floor(Math.random() * 3) + 1;
     let x = rndInt;
-    let compWeapon;
     if(x==1){
-        compWeapon = "Rock"
+        compWeapon = "ROCK"
     }
     else if (x==2){
-        compWeapon = "Paper"
+        compWeapon = "PAPER"
     }
     else {
-        compWeapon = "Scissors"
+        compWeapon = "SCISSORS"
     }
-    console.log(compWeapon)
+    console.log("I'm gonna pick:" + compWeapon)
 };
 
 
@@ -32,9 +34,8 @@ let getConsoleChoice = function(){
 // of rock, paper, or scissors. All other strings
 // must return an error, and try it again.
 let  getUserChoice = function(){
-let userInput = prompt("Choose your weapon!","Paper");
-let userWeapon = userInput.toUpperCase()
-console.log(userWeapon)
+userInput = prompt("Choose your weapon!","Paper");
+userWeapon = userInput.toUpperCase()
 if (userWeapon=="ROCK"){
     console.log("You have selected: "+ userWeapon)
 }
@@ -56,50 +57,50 @@ else{
 
 // Compare user input to computer generated answer. 
 
-let compChoice = function(){
-    let compWeapon= prompt("compweapon", "ROCK")
-    let userWeapon = prompt("userweapon", "PAPER")
-    switch(compWeapon===userWeapon){
-        case true:
-            console.log("You've both selected: " + userWeapon + ", resulting in a tie!")
-            break;
+let compareChoice = function(){
+    if(compWeapon===userWeapon){
+        console.log ("You've both selected:" + userWeapon + ", resulting in a tie!")
+    }
+    else if(userWeapon==="GUN"){
+        console.log("Well, a gun beats everything... I guess you win...")
+    }
+    else if(compWeapon==="ROCK"){
+        switch(userWeapon){
+            case "PAPER":
+                console.log("You win! Paper beats Rock!")
+                break;
+            case "SCISSORS": 
+                console.log("You lose! Scissors get smashed by Rock ):")
+                break;
+        }
+    }
+    else if (compWeapon==="PAPER"){
+        switch(userWeapon){
+            case "SCISSORS":
+                console.log("You win! Scissors beats Paper!")
+                break;
+            case "ROCK": 
+                console.log("You lose! Rock get covered by Paper):")
+                break;
+        }
+    }
+    else if (compWeapon==="SCISSORS"){
+        switch(userWeapon){
+            case "ROCK":
+                console.log("You win! Rock beats Scissors!")
+                break;
+            case "PAPER": 
+                console.log("You lose! Paper gets cut by rock ):")
+                break;
+        }
     
-        case false:
-            switch(userWeapon==="GUN"){
-                case true:
-                    console.log("Well, a gun beats everything... I guess you win...")
-                    break;
-                case false:
-            switch(compWeapon==="ROCK"){
-                case (true && userWeapon==="PAPER"):
-                    console.log(" Paper covers rock! You Win!")
-                    break;
-                case (true && userWeapon==="SCISSORS"):
-                    console.log("Rock smashes scissors! You lose!")
-                    break;
-                case false:
-                switch(compWeapon==="PAPER"){
-                    case(true && userWeapon==="ROCK"):
-                    console.log("Paper covers rock, sorry. You lose!")
-                    break;
-                    case(true && userWeapon==="Scissors"):
-                    console.log("You win! Scissors cut paper every time baby!")
-                    break;
-                    case false:
-                        switch(compWeapon==="SCISSORS"){
-                            case(true && userWeapon==="ROCK"):
-                            console.log("Rock beats scissors. (Literally) You Win!")
-                            break;
-                            case(true && userWeapon==="PAPER"):
-                            console.log("You brought paper to a scissors fight... Of course you lost lmao")
-                        }
-                    
-                }
-            }
-            }
-            
     }
 };
 
+let game = function(){
+    getConsoleChoice();
+    getUserChoice();
+    compareChoice();
+}
 
 // Display winner
