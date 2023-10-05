@@ -12,7 +12,14 @@
 // selection based on that number. 
 let compWeapon;
 let userWeapon;
-let userInput;
+let compScore=0;
+let userScore=0;
+let firstButton = document.querySelector('.surprise')
+let containerDiv = document.querySelector('div')
+    firstButton.addEventListener('click',()=>{
+        containerDiv.removeChild(firstButton)
+        game()
+    })
 
 let getConsoleChoice = function(){
     let rndInt= Math.floor(Math.random() * 3) + 1;
@@ -33,7 +40,7 @@ let getConsoleChoice = function(){
 // Acquiring user input, needs to only accept forms 
 // of rock, paper, or scissors. All other strings
 // must return an error, and try it again.
-let  getUserChoice = function(){
+/*let  getUserChoice = function(){
 userInput = prompt("Choose your weapon!","Paper");
 userWeapon = userInput.toUpperCase()
 if (userWeapon=="ROCK"){
@@ -53,24 +60,52 @@ else{
     getUserChoice()
 }
 }
+*/
+let getUserChoicev2 =function(){
+
+    let rockButton = document.createElement('button')
+    rockButton.textContent = "Rock"
+    containerDiv.appendChild(rockButton)
+    rockButton.addEventListener('click',()=>{
+        userWeapon = "ROCK" ;
+        compareChoice(); 
+    })
+    
+
+    let paperButton = document.createElement('button')
+    containerDiv.appendChild(paperButton)
+    paperButton.textContent = "Paper"
+    paperButton.addEventListener('click',()=>{
+        userWeapon = "PAPER"
+        compareChoice();
+    })
+
+    let scissorButton = document.createElement('button')
+    scissorButton.textContent = "Scissors"
+    containerDiv.appendChild(scissorButton)
+    scissorButton.addEventListener('click',()=>{
+        userWeapon = "SCISSORS"
+        compareChoice();
+    })
+};
 
 
 // Compare user input to computer generated answer. 
 
 let compareChoice = function(){
+    
     if(compWeapon===userWeapon){
         console.log ("You've both selected:" + userWeapon + ", resulting in a tie!")
-    }
-    else if(userWeapon==="GUN"){
-        console.log("Well, a gun beats everything... I guess you win...")
     }
     else if(compWeapon==="ROCK"){
         switch(userWeapon){
             case "PAPER":
                 console.log("You win! Paper beats Rock!")
+                userScore++;
                 break;
             case "SCISSORS": 
                 console.log("You lose! Scissors get smashed by Rock ):")
+                compScore++;
                 break;
         }
     }
@@ -99,8 +134,8 @@ let compareChoice = function(){
 
 let game = function(){
     getConsoleChoice();
-    getUserChoice();
-    compareChoice();
+    getUserChoicev2();
+    //compareChoice();
 }
 
 // Display winner
